@@ -1,0 +1,74 @@
+.signIn,
+.forget,
+.signUp,
+.account {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.signIn h1,
+.forget h1,
+.signUp h1,
+.account h1 {
+  color: var(--blue-600);
+  text-align: center;
+}
+
+.signIn form,
+.forget form,
+.signUp form,
+.account form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--size-2);
+}
+
+.signIn input,
+.forget input,
+.signUp input,
+.account input {
+  margin: var(--spacing-2) 0;
+  padding: var(--spacing-2);
+  color: var(--text-normal);
+  background: linear-gradient(to right, var(--off-white), var(--green-050));
+  outline: none;
+  border: none;
+}
+
+.signIn button {
+  background: var(--blue-100);
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.forget button,
+.signUp button,
+.account button {
+  background: var(--blue-100);
+  outline: none;
+  border: none;
+  padding: 1rem;
+  color: var(--blue-900);
+  cursor: pointer;
+}
+
+.signIn svg {
+  width: 36px;
+  height: 36px;
+  color: var(--blue-500);
+}
+
+.signOutButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.signOutButton svg {
+  color: var(--blue-600);
+}

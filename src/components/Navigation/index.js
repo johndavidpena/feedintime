@@ -1,26 +1,46 @@
 import React from 'react';
-
+import navStyles from './nav.module.css';
+import { TiHomeOutline, TiUserOutline, TiUserAddOutline, TiPlaneOutline } from 'react-icons/ti';
+import SignOutButton from '../SignOut';
 import { Link } from 'react-router-dom';
-
 import * as ROUTES from '../../constants/routes';
+import { AuthUserContext } from '../Session';
 
 const Navigation = () => (
-  <div>
-    <ul>
-      <li>
-        <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-      </li>
-      <li>
-        <Link to={ROUTES.LANDING}>Landing</Link>
-      </li>
-      <li>
-        <Link to={ROUTES.HOME}>Home</Link>
-      </li>
-      <li>
-        <Link to={ROUTES.ACCOUNT}>Account</Link>
-      </li>
-    </ul>
-  </div>
+  <React.Fragment>
+    <AuthUserContext.Consumer>
+      {authUser => authUser ? <NavigationAuth /> :
+        <NavigationNonAuth />}
+    </AuthUserContext.Consumer>
+  </React.Fragment>
+);
+
+const NavigationAuth = () => (
+  <ul className={navStyles.ul}>
+    <li>
+      <Link to={ROUTES.LANDING}><TiPlaneOutline /></Link>
+    </li>
+    <li>
+      <Link to={ROUTES.HOME}><TiHomeOutline /></Link>
+    </li>
+    <li>
+      <Link to={ROUTES.ACCOUNT}><TiUserOutline /></Link>
+    </li>
+    <li>
+      <SignOutButton />
+    </li>
+  </ul>
+);
+
+const NavigationNonAuth = () => (
+  <ul className={navStyles.ul}>
+    <li>
+      <Link to={ROUTES.LANDING}><TiPlaneOutline /></Link>
+    </li>
+    <li>
+      <Link to={ROUTES.SIGN_IN}><TiUserAddOutline /></Link>
+    </li>
+  </ul>
 );
 
 export default Navigation;

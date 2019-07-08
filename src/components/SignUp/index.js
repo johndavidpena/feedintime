@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import formStyles from '../../form.module.css';
 import { Link, withRouter } from 'react-router-dom';
-
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { useSpring, animated } from 'react-spring';
 
-const SignUpPage = () => (
-  <div>
-    <h1>Sign Up</h1>
-    <SignUpForm />
-  </div>
-);
+const SignUpPage = () => {
+  // A basic spring fade in on window load
+  const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
+
+  return (
+    <animated.div className={formStyles.signUp} style={fade}>
+      <h1>Sign Up</h1>
+      <SignUpForm />
+    </animated.div>
+  );
+}
 
 const INITIAL_STATE = {
   username: '',
@@ -32,6 +38,14 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        return this.props.firebase
+          .userRef(authUser.user.uid)
+          .set({
+            username,
+            email
+          });
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })

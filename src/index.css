@@ -21,8 +21,8 @@
   --box-shadow-less: 0 2px 3px 0 hsla(0, 0%, 0%, 0.2);
   --inset-box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.08);
 
-  --default-sans: 'Avenir', 'Roboto', sans-serif;
-  --default-serif: 'Playfair Display', 'Roboto Slab', serif;
+  --default-sans: 'Open Sans', sans-serif;
+  --default-serif: 'Barriecito', cursive;
 
   --font-size: 1.6rem;
 
@@ -407,22 +407,8 @@ html {
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
 }
-/* !ONE OPTION */
-/* On screens 600px or less */
-@media only screen and (max-width: 600px) {
-  html {
-    /* 1rem = 10px */
-    font-size: 62.5%;
-  }
-}
-/* On screens 601px or more */
-@media only screen and (min-width: 601px) {
-  html {
-    /* 1rem = 10px */
-    font-size: 70%;
-  }
-}
-/* !ANOTHER OPTION */
+
+/* If the width is less than 576px */
 @media only screen and (max-width: 576px) {
   html {
   font-size: 16px;
@@ -462,11 +448,65 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* App specific styles */
+/* If the width is less than 576px */
+@media only screen and (max-width: 576px) {
+h1 {
+  font-size: var(--font-size-5);
+  }
+}
+/* NOTE: The order seems to matter!! */
+/* If the width is 576px or MORE */
+@media only screen and (min-width: 36em) {
+h1 {
+    font-size: var(--font-size-6);
+  }
+}
+/* If the width is less than 576px */
+@media only screen and (max-width: 576px) {
+p {
+  font-size: var(--font-size-1);
+  }
+}
+/* NOTE: The order seems to matter!! */
+/* If the width is 576px or MORE */
+@media only screen and (min-width: 36em) {
+p {
+    font-size: var(--font-size-3);
+  }
+}
+
+body {
+  background: var(--green-300);
+}
+
+#root {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 100vw;
+  height: 100vh;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--default-serif);
+}
+
+p, span {
+  font-family: var(--default-sans);
+  color: var(--text-dark);
+}
+
+a {
+  text-decoration: none;
+  color: var(--green-050);
+}
+
+/* Normalize */
 main {
   display: block;
 }
 h1 {
-  font-size: 2em;
+  /* font-size: 2em; */
   margin: 0.67em 0;
 }
 hr {

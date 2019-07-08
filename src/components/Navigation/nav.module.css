@@ -1,0 +1,15 @@
+.ul {
+  display: flex;
+  justify-content: space-evenly;
+  padding: var(--size-2);
+}
+
+.ul li {
+  list-style-type: none;
+  font-size: var(--font-size);
+}
+
+.ul li a {
+  text-decoration: none;
+  color: var(--blue-600);
+}

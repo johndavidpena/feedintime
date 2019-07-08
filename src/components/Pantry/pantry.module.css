@@ -1,0 +1,35 @@
+.pantry h1 {
+  text-align: center;
+  color: var(--orange-400);
+  margin: 0;
+}
+
+.addItem {
+  display: flex;
+  flex-direction: column;
+  width: 76vw;
+  margin: 0 auto var(--size-2);
+}
+
+.addItem input {
+  margin: var(--spacing-2) 0;
+  padding: var(--spacing-2);
+  color: var(--text-normal);
+  background-image: linear-gradient(to right, var(--off-white), var(--green-050));
+  outline: none;
+  border: none;
+}
+
+.addItem button {
+  background: var(--blue-100);
+  outline: none;
+  border: none;
+  color: var(--blue-900);
+  cursor: pointer;
+}
+
+.addItem svg {
+  width: 36px;
+  height: 36px;
+  color: var(--blue-500);
+}

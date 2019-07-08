@@ -1,0 +1,11 @@
+.home {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+}
+
+.pantry h1,
+.recipes h1 {
+  color: var(--green-050);
+  cursor: pointer;
+}

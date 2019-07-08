@@ -1,0 +1,5 @@
+.recipes h1 {
+  text-align: center;
+  color: var(--orange-400);
+  margin: 0;
+}

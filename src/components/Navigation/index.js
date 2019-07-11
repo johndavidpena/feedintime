@@ -4,18 +4,24 @@ import { TiHomeOutline, TiUserOutline, TiUserAddOutline, TiPlaneOutline } from '
 import SignOutButton from '../SignOut';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+// import * as ROLES from '../../constants/roles';
 import { AuthUserContext } from '../Session';
 
 const Navigation = () => (
   <React.Fragment>
     <AuthUserContext.Consumer>
-      {authUser => authUser ? <NavigationAuth /> :
-        <NavigationNonAuth />}
+      {authUser =>
+        authUser ? (
+          <NavigationAuth authUser={authUser} />
+        ) : (
+            <NavigationNonAuth />
+          )
+      }
     </AuthUserContext.Consumer>
   </React.Fragment>
 );
 
-const NavigationAuth = () => (
+const NavigationAuth = ({ authUser }) => (
   <ul className={navStyles.ul}>
     <li>
       <Link to={ROUTES.LANDING}><TiPlaneOutline /></Link>
@@ -26,6 +32,11 @@ const NavigationAuth = () => (
     <li>
       <Link to={ROUTES.ACCOUNT}><TiUserOutline /></Link>
     </li>
+    {/* {!!authUser.roles[ROLES.ADMIN] && (
+      <li>
+        <Link to={ROUTES.ADMIN}>Admin</Link>
+      </li>
+    )} */}
     <li>
       <SignOutButton />
     </li>

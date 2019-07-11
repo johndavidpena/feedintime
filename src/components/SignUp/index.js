@@ -3,6 +3,7 @@ import formStyles from '../../form.module.css';
 import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 import { useSpring, animated } from 'react-spring';
 
 const SignUpPage = () => {
@@ -22,6 +23,7 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
+  isAdmin: false,
   error: null,
 };
 
@@ -33,7 +35,12 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state;
+    const { username, email, passwordOne, isAdmin } = this.state;
+    const roles = {};
+
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -42,7 +49,8 @@ class SignUpFormBase extends Component {
           .userRef(authUser.user.uid)
           .set({
             username,
-            email
+            email,
+            roles
           });
       })
       .then(() => {

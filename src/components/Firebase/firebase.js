@@ -31,14 +31,38 @@ class Firebase {
 
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
+  // Merge AUTH and REALTIME DB api
+  onAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.userRef(authUser.uid)
+          .once('value')
+          .then(snapshot => {
+            const dbUser = snapshot.val();
+            // Merge auth and db user
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser
+            };
+
+            next(authUser);
+          });
+      } else {
+        fallback();
+      }
+    });
 
   // REALTIME DATABASE api
-  // Gets a reference to a user by identifier (uid)
   userRef = uid => this.db.ref(`users/${uid}`);
+  // Not using, only for admin role and showing all users
+  // users = () => this.db.ref('users');
 
-  pantryRef = uid => this.db.ref(`pantry/${uid}`);
-
-  recipesRef = uid => this.db.ref(`recipes/${uid}`);
+  // *** Pantry API ***
+  // message = uid => this.db.ref(`messages/${uid}`);
+  // messages = () => this.db.ref('messages');
+  pantry = uid => this.db.ref(`pantry/${uid}`);
+  pantryItems = () => this.db.ref('pantry');
 }
 
 export default Firebase;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import pantryStyles from './pantry.module.css';
-// import { AuthUserContext } from '../Session';
+import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 // import { useSpring, animated } from 'react-spring';
 
@@ -49,28 +49,32 @@ class ItemsBase extends Component {
     const { items, loading, error } = this.state;
 
     return (
-      // <AuthUserContext.Consumer>
-      //   {authUser => (
+      <AuthUserContext.Consumer>
+        {authUser => (
           <div>
             {error && <p>{error.message}</p>}
 
             {loading && <div>Loading...</div>}
 
             {items ? (
-              <ItemsList items={items} onRemoveItem={this.onRemoveItem} />
+              <ItemsList
+                items={items}
+                onRemoveItem={this.onRemoveItem}
+                authUser={authUser} />
             ) : (<div>There are no pantry items...</div>
               )}
           </div>
-      //   )}
-      // </AuthUserContext.Consumer>
+        )}
+      </AuthUserContext.Consumer>
     );
   }
 }
 
-const ItemsList = ({ items, onRemoveItem }) => (
+const ItemsList = ({ authUser, items, onRemoveItem }) => (
   <ul>
     {items.map(item => (
       <PantryItem
+        authUser={authUser}
         key={item.uid}
         item={item}
         onRemoveItem={onRemoveItem} />
@@ -79,17 +83,21 @@ const ItemsList = ({ items, onRemoveItem }) => (
 );
 
 const PantryItem = props => {
-  const { item, onRemoveItem } = props;
+  const { authUser, item, onRemoveItem } = props;
 
   return (
     <li>
-      <p>{item.item} - {item.desc} Stocked: {item.stocked.toString()}</p>
+      {authUser.uid === item.userId && (
+        <React.Fragment>
+          <p>{item.item} - {item.desc} Stocked: {item.stocked.toString()}</p>
 
-      <button
-        type="button"
-        onClick={() => onRemoveItem(item.uid)}>
-        Delete
+          <button
+            type="button"
+            onClick={() => onRemoveItem(item.uid)}>
+            Delete
         </button>
+        </React.Fragment>
+      )}
     </li>
   );
 }

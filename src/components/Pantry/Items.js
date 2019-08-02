@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import pantryStyles from './pantry.module.css';
+import pantryStyles from './pantry.module.css';
+import { TiDeleteOutline } from 'react-icons/ti';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 // import { useSpring, animated } from 'react-spring';
@@ -41,6 +42,16 @@ class ItemsBase extends Component {
     this.props.firebase.pantryItems().off();
   }
 
+  // FIX: Not working yet, just need to get the opposite of the current value
+  // NOTE: Re-renders on first click BUT not after, lifecycle method needed?
+  onStockItem = item => {
+    console.log('onStockItem', item);
+
+    this.props.firebase.pantry(item.uid).update({
+      stocked: !this.state.stocked
+    });
+  }
+
   onRemoveItem = uid => {
     this.props.firebase.pantry(uid).remove();
   }
@@ -51,7 +62,7 @@ class ItemsBase extends Component {
     return (
       <AuthUserContext.Consumer>
         {authUser => (
-          <div>
+          <div className={pantryStyles.items}>
             {error && <p>{error.message}</p>}
 
             {loading && <div>Loading...</div>}
@@ -60,6 +71,7 @@ class ItemsBase extends Component {
               <ItemsList
                 items={items}
                 onRemoveItem={this.onRemoveItem}
+                onStockItem={this.onStockItem}
                 authUser={authUser} />
             ) : (<div>There are no pantry items...</div>
               )}
@@ -70,32 +82,64 @@ class ItemsBase extends Component {
   }
 }
 
-const ItemsList = ({ authUser, items, onRemoveItem }) => (
+const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => (
   <ul>
     {items.map(item => (
       <PantryItem
         authUser={authUser}
         key={item.uid}
         item={item}
-        onRemoveItem={onRemoveItem} />
+        onRemoveItem={onRemoveItem}
+        onStockItem={onStockItem} />
     ))}
   </ul>
 );
 
 const PantryItem = props => {
-  const { authUser, item, onRemoveItem } = props;
+  const { authUser, item, onStockItem, onRemoveItem } = props;
 
   return (
     <li>
       {authUser.uid === item.userId && (
         <React.Fragment>
-          <p>{item.item} - {item.desc} Stocked: {item.stocked.toString()}</p>
+          {/* ORIGINAL */}
+          {/* <p>Stocked: {item.stocked.toString()}</p> */}
+          {/* <input type="checkbox" */}
+          {/* name="stocked" */}
+          {/* onChange={() => onStockItem(item)} /> */}
+          {/* <p>{item.item}</p> */}
 
+          {item.stocked && (
+            <label className={pantryStyles.checkbox}>
+              {item.item}
+              <input
+                type="checkbox"
+                id={item.uid}
+                onChange={() => onStockItem(item)}
+                checked
+              />
+              <span className={pantryStyles.checkmark} />
+            </label>
+          )}
+
+          {!item.stocked && (
+            <label className={pantryStyles.checkbox}>
+              {item.item}
+              <input
+                type="checkbox"
+                id={item.uid}
+                onChange={() => onStockItem(item)}
+              />
+              <span className={pantryStyles.checkmark} />
+            </label>
+          )}
+
+          <p>{item.desc}</p>
           <button
             type="button"
             onClick={() => onRemoveItem(item.uid)}>
-            Delete
-        </button>
+            <TiDeleteOutline />
+          </button>
         </React.Fragment>
       )}
     </li>

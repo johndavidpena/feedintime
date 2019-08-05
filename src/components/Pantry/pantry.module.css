@@ -47,7 +47,7 @@
   grid-template-columns: 60% 25% 15%;
   align-items: center;
   /* background: var(--green-100); */
-  /* padding: var(--spacing-1); */
+  padding: var(--spacing-1);
 }
 
 .items li p {
@@ -61,7 +61,7 @@
 .items li button svg {
   width: 36px;
   height: 36px;
-  color: var(--orange-300);
+  color: var(--orange-400);
 }
 
 /* FROM...https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
@@ -73,7 +73,7 @@
   text-overflow: ellipsis;
 
   border-radius: 2px;
-  line-height: 3rem;
+  line-height: 2.5rem;
   padding-left: 4rem;
   cursor: pointer;
   font-size: 100%;
@@ -99,7 +99,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .checkbox input:checked ~ .checkmark {
-  background-color: var(--orange-400);
+  background-color: var(--blue-500);
 }
 
 /* Show the checkmark when checked */
@@ -109,13 +109,30 @@
 
 /* Style the checkmark/indicator */
 .checkbox .checkmark:after {
-  left: 1rem;
+  left: 0.8rem;
   top: 0;
-  width: 1.1rem;
-  height: 2.5rem;
+  width: 0.85rem;
+  height: 2rem;
   border: solid white;
   border-width: 0 5px 5px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: white;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
 }

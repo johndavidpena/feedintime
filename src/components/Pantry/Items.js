@@ -3,7 +3,7 @@ import pantryStyles from './pantry.module.css';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
-// import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 class ItemsBase extends Component {
   constructor(props) {
@@ -42,14 +42,20 @@ class ItemsBase extends Component {
     this.props.firebase.pantryItems().off();
   }
 
-  // FIX: Not working yet, just need to get the opposite of the current value
-  // NOTE: Re-renders on first click BUT not after, lifecycle method needed?
   onStockItem = item => {
-    console.log('onStockItem', item);
+    if (item.stocked) {
+      this.props.firebase.pantry(item.uid).update({
+        stocked: false
+      });
+    } else {
+      this.props.firebase.pantry(item.uid).update({
+        stocked: true
+      });
+    }
 
-    this.props.firebase.pantry(item.uid).update({
-      stocked: !this.state.stocked
-    });
+    // this.props.firebase.pantryItems().on('child_changed', function (data) {
+    //   console.log('child_changed', data);
+    // });
   }
 
   onRemoveItem = uid => {
@@ -82,33 +88,54 @@ class ItemsBase extends Component {
   }
 }
 
-const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => (
-  <ul>
-    {items.map(item => (
-      <PantryItem
-        authUser={authUser}
-        key={item.uid}
-        item={item}
-        onRemoveItem={onRemoveItem}
-        onStockItem={onStockItem} />
-    ))}
-  </ul>
-);
+// const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => (
+//   <ul>
+//     {items.map(item => (
+//       <PantryItem
+//         authUser={authUser}
+//         key={item.uid}
+//         item={item}
+//         onRemoveItem={onRemoveItem}
+//         onStockItem={onStockItem} />
+//     ))}
+//   </ul>
+// );
+const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => {
+  function compare(a, b) {
+    let comparison = 0;
+    if (a.stocked && b.stocked) comparison = -1;
+    if (!a.stocked && !b.stocked) comparison = -1;
+    if (a.stocked && !b.stocked) comparison = 1;
+    if (!a.stocked && b.stocked) comparison = -1;
+    return comparison;
+  }
+
+  // NOTE: This sort function DOES mutate the array
+  items = items.sort(compare);
+
+  return (
+    <ul>
+      {items.map(item => (
+        <PantryItem
+          authUser={authUser}
+          key={item.uid}
+          item={item}
+          onRemoveItem={onRemoveItem}
+          onStockItem={onStockItem} />
+      ))}
+    </ul>
+  );
+}
 
 const PantryItem = props => {
   const { authUser, item, onStockItem, onRemoveItem } = props;
 
+  const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
+
   return (
-    <li>
+    <animated.li style={fade}>
       {authUser.uid === item.userId && (
         <React.Fragment>
-          {/* ORIGINAL */}
-          {/* <p>Stocked: {item.stocked.toString()}</p> */}
-          {/* <input type="checkbox" */}
-          {/* name="stocked" */}
-          {/* onChange={() => onStockItem(item)} /> */}
-          {/* <p>{item.item}</p> */}
-
           {item.stocked && (
             <label className={pantryStyles.checkbox}>
               {item.item}
@@ -142,7 +169,7 @@ const PantryItem = props => {
           </button>
         </React.Fragment>
       )}
-    </li>
+    </animated.li>
   );
 }
 

@@ -88,18 +88,6 @@ class ItemsBase extends Component {
   }
 }
 
-// const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => (
-//   <ul>
-//     {items.map(item => (
-//       <PantryItem
-//         authUser={authUser}
-//         key={item.uid}
-//         item={item}
-//         onRemoveItem={onRemoveItem}
-//         onStockItem={onStockItem} />
-//     ))}
-//   </ul>
-// );
 const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => {
   function compare(a, b) {
     let comparison = 0;
@@ -162,11 +150,7 @@ const PantryItem = props => {
           )}
 
           <p>{item.desc}</p>
-          <button
-            type="button"
-            onClick={() => onRemoveItem(item.uid)}>
-            <TiDeleteOutline />
-          </button>
+          <TiDeleteOutline onClick={() => onRemoveItem(item.uid)} />
         </React.Fragment>
       )}
     </animated.li>

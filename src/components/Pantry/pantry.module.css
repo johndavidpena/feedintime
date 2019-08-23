@@ -11,6 +11,12 @@
   margin: 0 auto var(--size-2);
 }
 
+@media only screen and (min-width: 1000px) {
+  .addItem {
+    max-width: 50vw;
+  }
+}
+
 .addItem input {
   margin: var(--spacing-2) 0;
   padding: var(--spacing-2);
@@ -38,6 +44,13 @@
   margin: auto var(--size-2);
 }
 
+@media only screen and (min-width: 1000px) {
+  .items {
+    margin: auto;
+    max-width: 50vw;
+  }
+}
+
 .items ul {
   list-style: none;
 }
@@ -62,6 +75,8 @@
   width: 36px;
   height: 36px;
   color: var(--orange-500);
+  cursor: pointer;
+  justify-self: end;
 }
 
 /* FROM...https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */

@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <animated.div className={landingStyles.landing} style={fade}>
       <h1>Welcome to<br />Feedin'Time</h1>
-      <p>A simple app to manage your<br />grocery list and recipes.</p>
+      <p>A simple app to manage your grocery list and recipes.</p>
     </animated.div>
   );
 }

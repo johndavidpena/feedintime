@@ -1,6 +1,6 @@
 import React from 'react';
 import navStyles from './nav.module.css';
-import { TiHomeOutline, TiUserOutline, TiUserAddOutline, TiPlaneOutline } from 'react-icons/ti';
+import { FiHome, FiUser, FiUserPlus, FiAnchor } from 'react-icons/fi';
 import SignOutButton from '../SignOut';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
@@ -24,13 +24,13 @@ const Navigation = () => (
 const NavigationAuth = ({ authUser }) => (
   <ul className={navStyles.ul}>
     <li>
-      <Link to={ROUTES.LANDING}><TiPlaneOutline /></Link>
+      <Link to={ROUTES.LANDING}><FiAnchor /></Link>
     </li>
     <li>
-      <Link to={ROUTES.HOME}><TiHomeOutline /></Link>
+      <Link to={ROUTES.HOME}><FiHome /></Link>
     </li>
     <li>
-      <Link to={ROUTES.ACCOUNT}><TiUserOutline /></Link>
+      <Link to={ROUTES.ACCOUNT}><FiUser /></Link>
     </li>
     {/* {!!authUser.roles[ROLES.ADMIN] && (
       <li>
@@ -46,10 +46,10 @@ const NavigationAuth = ({ authUser }) => (
 const NavigationNonAuth = () => (
   <ul className={navStyles.ul}>
     <li>
-      <Link to={ROUTES.LANDING}><TiPlaneOutline /></Link>
+      <Link to={ROUTES.LANDING}><FiAnchor /></Link>
     </li>
     <li>
-      <Link to={ROUTES.SIGN_IN}><TiUserAddOutline /></Link>
+      <Link to={ROUTES.SIGN_IN}><FiUserPlus /></Link>
     </li>
   </ul>
 );

@@ -1,0 +1,315 @@
+/* Breakpoints from https://flaviocopes.com/css-breakpoints/
+mobile portrait: less than 640px
+mobile landscape: > 640px
+tablet portrait: > 768px
+tablet landscape: > 1024px
+laptop: > 1280px
+Design for mobile-first then work up
+@media (min-width: 640px) {}
+@media (min-width: 768px) {}
+@media (min-width: 1024px) {}
+@media (min-width: 1280px) {} */
+:root {
+  --text-dark: hsl(0, 0%, 13%);
+  --text-normal: hsl(0, 0%, 29%);
+  --text-light: hsl(0, 0%, 45%);
+
+  --white: hsl(0, 0%, 100%);
+  --off-white: hsl(0, 0%, 99%);
+
+  --grey-050: #F7F7F7;
+  --grey-100: #E1E1E1;
+  --grey-200: #CFCFCF;
+  --grey-300: #B1B1B1;
+  --grey-400: #9E9E9E;
+  --grey-500: #7E7E7E;
+  --grey-600: #626262;
+  --grey-700: #515151;
+  --grey-800: #3B3B3B;
+  --grey-900: #222222;
+
+  --box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+  --box-shadow-less: 0 2px 3px 0 hsla(0, 0%, 0%, 0.2);
+  --box-shadow-least: 0 1px 2px 0 hsla(0, 0%, 0%, 0.2);
+  --inset-box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.08);
+
+  /* --default-sans: 'Avenir', 'Roboto', sans-serif;
+  --default-serif: 'Playfair Display', 'Roboto Slab', serif; */
+  --default-sans: 'Open Sans', sans-serif;
+  --default-serif: 'Barriecito', cursive;
+
+  --font-smaller: 0.85rem;
+  --font-size: 1rem;
+  --font-larger: 1.25rem;
+
+  --spacing-7: 16rem;
+  --spacing-6: 8rem;
+  --spacing-5: 4rem;
+  --spacing-4: 2rem;
+  --spacing-3: 1rem;
+  --spacing-2: 0.5rem;
+  --spacing-1: 0.25rem;
+
+  --size-96: 96rem;
+  --size-64: 64rem;
+  --size-48: 48rem;
+  --size-32: 32rem;
+  --size-24: 24rem;
+  --size-16: 16rem;
+  --size-8: 8rem;
+  --size-4: 4rem;
+  --size-2: 2rem;
+  --size-1: 1rem;
+
+  --border-radius: 5px;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  font-family: var(--default-sans);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+/* If the width is less than 576px */
+@media only screen and (max-width: 576px) {
+  html {
+  font-size: 16px;
+  }
+}
+/* NOTE: The order seems to matter!! */
+/* If the width is 576px or MORE */
+@media only screen and (min-width: 36em) {
+  html {
+    font-size: 17px;
+  }
+}
+/* If the width is 768px or MORE */
+@media only screen and (min-width: 48em) {
+  html {
+    font-size: 18px;
+  }
+}
+/* If the width is 992px or MORE */
+@media only screen and (min-width: 62em) {
+  html {
+    font-size: 19px;
+  }
+}
+
+body {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.absCentered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.textAlign {
+  text-align: center;
+}
+
+.textNormal {
+  color: var(--text-normal);
+}
+.textLight {
+  color: var(--text-light);
+}
+.textDark {
+  color: var(--text-dark);
+}
+
+.boxShadow {
+  box-shadow: var(--box-shadow);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--default-serif);
+  font-weight: 400;
+  color: var(--text-normal);
+  margin-bottom: 1rem;
+}
+
+p, span, a {
+  font-family: var(--default-sans);
+  font-size: var(--font-size);
+  font-weight: 400;
+  color: var(--text-normal);
+}
+
+a {
+  text-decoration: none;
+}
+
+.videoResponsive{
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin: 20px 0;
+}
+
+.videoResponsive iframe{
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+/* Below is normalize */
+main {
+  display: block;
+}
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+a {
+  background-color: transparent;
+}
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+b,
+strong {
+  font-weight: bolder;
+}
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+img {
+  border-style: none;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+button,
+input { /* 1 */
+  overflow: visible;
+}
+button,
+select { /* 1 */
+  text-transform: none;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+progress {
+  vertical-align: baseline;
+}
+textarea {
+  overflow: auto;
+}
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+details {
+  display: block;
+}
+summary {
+  display: list-item;
+}
+template {
+  display: none;
+}
+[hidden] {
+  display: none;
+}

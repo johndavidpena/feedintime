@@ -14,7 +14,7 @@
 .forget h1,
 .signUp h1,
 .account h1 {
-  color: var(--blue-600);
+  color: var(--grey-600);
   text-align: center;
 }
 
@@ -34,13 +34,13 @@
   margin: var(--spacing-2) 0;
   padding: var(--spacing-2);
   color: var(--text-normal);
-  background: linear-gradient(to right, var(--off-white), var(--green-050));
+  background: var(--grey-050);
   outline: none;
   border: none;
 }
 
 .signIn button {
-  background: var(--blue-100);
+  background: var(--grey-100);
   outline: none;
   border: none;
   cursor: pointer;
@@ -49,18 +49,18 @@
 .forget button,
 .signUp button,
 .account button {
-  background: var(--blue-100);
+  background: var(--grey-100);
   outline: none;
   border: none;
   padding: 1rem;
-  color: var(--blue-900);
+  color: var(--grey-900);
   cursor: pointer;
 }
 
 .signIn svg {
   width: 36px;
   height: 36px;
-  color: var(--blue-500);
+  color: var(--grey-600);
 }
 
 .signOutButton {
@@ -70,5 +70,5 @@
 }
 
 .signOutButton svg {
-  color: var(--blue-600);
+  color: var(--grey-600);
 }

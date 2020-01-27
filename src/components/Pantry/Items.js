@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import pantryStyles from './pantry.module.css';
-import { TiDeleteOutline } from 'react-icons/ti';
+import { FiX } from 'react-icons/fi';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 import { useSpring, animated } from 'react-spring';
@@ -89,10 +89,18 @@ class ItemsBase extends Component {
 }
 
 const ItemsList = ({ authUser, items, onStockItem, onRemoveItem }) => {
+  // function compare(a, b) {
+  //   let comparison = 0;
+  //   if (a.stocked && b.stocked) comparison = -1;
+  //   if (!a.stocked && !b.stocked) comparison = -1;
+  //   if (a.stocked && !b.stocked) comparison = 1;
+  //   if (!a.stocked && b.stocked) comparison = -1;
+  //   return comparison;
+  // }
   function compare(a, b) {
     let comparison = 0;
-    if (a.stocked && b.stocked) comparison = -1;
-    if (!a.stocked && !b.stocked) comparison = -1;
+    if (a.stocked && b.stocked && a.item < b.item) comparison = -1;
+    if (!a.stocked && !b.stocked && a.item < b.item) comparison = -1;
     if (a.stocked && !b.stocked) comparison = 1;
     if (!a.stocked && b.stocked) comparison = -1;
     return comparison;
@@ -126,7 +134,7 @@ const PantryItem = props => {
         <React.Fragment>
           {item.stocked && (
             <label className={pantryStyles.checkbox}>
-              {item.item}
+              <p>{item.item}</p>
               <input
                 type="checkbox"
                 id={item.uid}
@@ -139,7 +147,7 @@ const PantryItem = props => {
 
           {!item.stocked && (
             <label className={pantryStyles.checkbox}>
-              {item.item}
+              <p>{item.item}</p>
               <input
                 type="checkbox"
                 id={item.uid}
@@ -149,8 +157,7 @@ const PantryItem = props => {
             </label>
           )}
 
-          <p>{item.desc}</p>
-          <TiDeleteOutline onClick={() => onRemoveItem(item.uid)} />
+          <FiX onClick={() => onRemoveItem(item.uid)} />
         </React.Fragment>
       )}
     </animated.li>

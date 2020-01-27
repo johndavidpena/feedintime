@@ -63,6 +63,7 @@ class Firebase {
   // messages = () => this.db.ref('messages');
   pantry = uid => this.db.ref(`pantry/${uid}`);
   pantryItems = () => this.db.ref('pantry');
+  // pantryItems = () => this.db.ref('pantry').orderByChild('item');
 }
 
 export default Firebase;

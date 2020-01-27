@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import pantryStyles from './pantry.module.css';
-import { TiPlusOutline } from 'react-icons/ti';
+import { FiPlus } from 'react-icons/fi';
 import { AuthUserContext, withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { useSpring, animated } from 'react-spring';
@@ -24,7 +24,6 @@ class PantryAddFormBase extends Component {
 
     this.state = {
       item: '',
-      desc: '',
       error: null
     };
   }
@@ -33,14 +32,10 @@ class PantryAddFormBase extends Component {
     this.props.firebase.pantryItems().push({
       userId: authUser.uid,
       item: this.state.item,
-      desc: this.state.desc,
       stocked: false
     });
 
-    this.setState({
-      item: '',
-      desc: ''
-    });
+    this.setState({ item: '' });
 
     event.preventDefault();
   }
@@ -50,7 +45,7 @@ class PantryAddFormBase extends Component {
   }
 
   render() {
-    const { item, desc, error } = this.state;
+    const { item, error } = this.state;
 
     const isInvalid = item === '';
 
@@ -66,15 +61,8 @@ class PantryAddFormBase extends Component {
               type="text"
               placeholder="New item"
             />
-            <input
-              name="desc"
-              value={desc}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Description"
-            />
             <button disabled={isInvalid} type="submit">
-              <TiPlusOutline />
+              <FiPlus />
             </button>
 
             {error && <p>{error.message}</p>}

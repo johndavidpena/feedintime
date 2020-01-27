@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import formStyles from '../../form.module.css';
-import { TiArrowRightOutline } from 'react-icons/ti';
+import { FiArrowRight } from 'react-icons/fi';
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
@@ -61,13 +61,14 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} >
         <input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email"
+          autoComplete='off'
         />
         <input
           name="password"
@@ -75,9 +76,10 @@ class SignInFormBase extends Component {
           onChange={this.onChange}
           type="password"
           placeholder="Password"
+          autoComplete='off'
         />
         <button disabled={isInvalid} type="submit">
-          <TiArrowRightOutline />
+          <FiArrowRight />
         </button>
 
         {error && <p>{error.message}</p>}

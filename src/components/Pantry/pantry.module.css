@@ -1,6 +1,5 @@
 .pantry h1 {
   text-align: center;
-  color: var(--orange-400);
   margin: 0;
 }
 
@@ -21,27 +20,26 @@
   margin: var(--spacing-2) 0;
   padding: var(--spacing-2);
   color: var(--text-normal);
-  background-image: linear-gradient(to right, var(--off-white), var(--green-050));
+  background: var(--grey-050);
   outline: none;
   border: none;
 }
 
 .addItem button {
-  background: var(--blue-100);
+  background: var(--grey-100);
   outline: none;
   border: none;
-  color: var(--blue-900);
   cursor: pointer;
 }
 
 .addItem svg {
   width: 36px;
   height: 36px;
-  color: var(--blue-500);
+  color: var(--grey-600);
 }
 
 .items {
-  margin: auto var(--size-2);
+  margin: auto var(--size-1);
 }
 
 @media only screen and (min-width: 1000px) {
@@ -57,9 +55,8 @@
 
 .items li {
   display: grid;
-  grid-template-columns: 60% 25% 15%;
+  grid-template-columns: 85% 15%;
   align-items: center;
-  /* background: var(--green-100); */
   padding: var(--spacing-1);
 }
 
@@ -74,7 +71,6 @@
 .items li svg {
   width: 36px;
   height: 36px;
-  color: var(--orange-500);
   cursor: pointer;
   justify-self: end;
 }
@@ -114,7 +110,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .checkbox input:checked ~ .checkmark {
-  background-color: var(--blue-500);
+  /* background-color: var(--blue-500); */
 }
 
 /* Show the checkmark when checked */
@@ -128,8 +124,8 @@
   top: 0;
   width: 0.85rem;
   height: 2rem;
-  border: solid white;
-  border-width: 0 5px 5px 0;
+  border: solid var(--grey-800);
+  border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
@@ -142,7 +138,7 @@
   left: 0;
   height: 2.5rem;
   width: 2.5rem;
-  background-color: white;
+  background-color: var(--grey-050);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
